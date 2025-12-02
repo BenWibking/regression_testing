@@ -26,6 +26,7 @@ import params
 import test_util
 import test_report as report
 import test_coverage as coverage
+import test_asv
 
 safe_flags = ['TEST', 'USE_CUDA', 'USE_ACC', 'USE_MPI', 'USE_OMP', 'DEBUG', 'USE_GPU']
 
@@ -1264,6 +1265,11 @@ def test_suite(argv):
     file_path = suite.get_wallclock_file()
     with open(file_path, 'w') as json_file:
         json.dump(runtimes, json_file, indent=4)
+
+    #--------------------------------------------------------------------------
+    # output ASV results
+    #--------------------------------------------------------------------------
+    test_asv.save_asv_history(suite, test_list)
 
     #--------------------------------------------------------------------------
     # parameter coverage
